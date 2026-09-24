@@ -26,15 +26,17 @@ jobs:
           pip install --upgrade pip setuptools
           pip install buildozer cython
 
-      - name: Pré-aceitar licenças do Android SDK
+      - name: Aceitar licenças e Gerar APK
         run: |
-          mkdir -p ~/.android
-          touch ~/.android/repositories.cfg
-          # Garante o download inicial do SDK e aceitação prévia
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          # Prepara o SDK interno do buildozer antes da compilação
+          buildozer android debug || true
+          
+          # Aceita todas as licenças dentro da pasta do SDK do Buildozer
+          if [ -d "$HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin" ]; then
+            yes | $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          fi
 
-      - name: Gerar APK
-        run: |
+          # Executa a compilação final
           buildozer -v android debug
 
       - name: Disponibilizar APK
