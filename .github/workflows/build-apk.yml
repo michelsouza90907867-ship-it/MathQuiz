@@ -19,7 +19,7 @@ jobs:
       - name: Instalar dependências de sistema
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zlib1g-dev libssl-dev openssl libgdbm-dev libgdbm-compat-dev liblzma-dev libreadline-dev libffi-dev libgl1-mesa-dev libgles2-mesa-dev ccache ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixin-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev openjdk-17-jdk
+          sudo apt-get install -y build-essential ccache git libffi-dev libssl-dev openjdk-17-jdk
 
       - name: Aceitar licenças do Android SDK
         run: |
@@ -39,4 +39,4 @@ jobs:
         with:
           name: MathQuizAPK
           path: bin/*.apk
-
+          
